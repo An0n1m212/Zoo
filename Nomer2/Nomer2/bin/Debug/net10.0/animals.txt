@@ -1,0 +1,2 @@
+Crocodile;Богдан;20;False;False;35,5;Waiting
+Crocodile;Musi;100;True;True;9;Waiting

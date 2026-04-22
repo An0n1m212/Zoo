@@ -1,0 +1,14 @@
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\bin\Debug\net10.0\Nomer2.exe
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\bin\Debug\net10.0\Nomer2.deps.json
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\bin\Debug\net10.0\Nomer2.runtimeconfig.json
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\bin\Debug\net10.0\Nomer2.dll
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\bin\Debug\net10.0\Nomer2.pdb
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\Nomer2.GeneratedMSBuildEditorConfig.editorconfig
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\Nomer2.AssemblyInfoInputs.cache
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\Nomer2.AssemblyInfo.cs
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\Nomer2.csproj.CoreCompileInputs.cache
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\Nomer2.dll
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\refint\Nomer2.dll
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\Nomer2.pdb
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\Nomer2.genruntimeconfig.cache
+E:\KRNU\CMOOP\Lab7\Nomer2\Nomer2\obj\Debug\net10.0\ref\Nomer2.dll
