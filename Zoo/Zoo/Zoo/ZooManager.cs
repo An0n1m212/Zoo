@@ -1,4 +1,4 @@
-﻿namespace Zoo
+namespace Zoo
 {
     public class ZooManager
     {
@@ -11,14 +11,8 @@
         public CrocodileManager Crocodile { get; set; } = new CrocodileManager();
         public CrocodileEnclosureManager CrocodileEncl { get; set; } = new CrocodileEnclosureManager();
 
-        private Dictionary<int, ISpeciesModule> _speciesMenu;
-
-        public Dictionary<string, ISpeciesModule> GetSections() => new Dictionary<string, ISpeciesModule>
-            {
-                { "SECTION:TIGERS", _speciesMenu[1] },
-                { "SECTION:KANGAROOS", _speciesMenu[2] },
-                { "SECTION:CROCODILES", _speciesMenu[3] }
-            };
+        
+        private ISpeciesModule[] _speciesModules;
 
         public ZooManager()
         {
@@ -26,51 +20,34 @@
             KangarooEncl.CreateDefaultWaitEnclosures();
             CrocodileEncl.CreateDefaultWaitEnclosures();
 
-            _speciesMenu = new Dictionary<int, ISpeciesModule>
+           
+            _speciesModules = new ISpeciesModule[]
             {
-                { 1, new SpeciesModule<Tiger>(Tiger, TigerEncl) },
-                { 2, new SpeciesModule<Kangaroo>(Kangaroo, KangarooEncl) },
-                { 3, new SpeciesModule<Crocodile>(Crocodile, CrocodileEncl) }
+                new SpeciesModule<Tiger>(Tiger, TigerEncl),
+                new SpeciesModule<Kangaroo>(Kangaroo, KangarooEncl),
+                new SpeciesModule<Crocodile>(Crocodile, CrocodileEncl)
             };
         }
-        public void AddAnimal()
-        {
-            int type = SelectSpecies("Кого додаємо?");
-            _speciesMenu[type].CreateInteractive();
-        }
-        public void RemoveAnimal()
-        {
-            int type = SelectSpecies("Кого хочете видалити?");
-            _speciesMenu[type].DeleteAnimal();
-        }
 
-        public void ModifyAnimal()
-        {
-            int type = SelectSpecies("Кого хочете редагувати?");
-            _speciesMenu[type].EditAnimal();
-        }
+        public void AddAnimal() => GetSelectedModule("Кого додаємо?")?.CreateInteractive();
+        
+        public void RemoveAnimal() => GetSelectedModule("Кого хочете видалити?")?.DeleteAnimal();
 
-        public void Relocate()
-        {
-            int type = SelectSpecies("Кого розселяємо?");
-            _speciesMenu[type].RelocateProcess();
-        }
+        public void ModifyAnimal() => GetSelectedModule("Кого хочете редагувати?")?.EditAnimal();
 
-        public void CreateEncl()
-        {
-            int type = SelectSpecies("Для кого створюємо вольєр?");
-            _speciesMenu[type].CreateEnclosure();
-        }
+        public void Relocate() => GetSelectedModule("Кого розселяємо?")?.RelocateProcess();
+
+        public void CreateEncl() => GetSelectedModule("Для кого створюємо вольєр?")?.CreateEnclosure();
 
         public void ShowAllStatus()
         {
-            foreach (var module in _speciesMenu.Values)
+            foreach (var module in _speciesModules)
                 module.ShowStatus();
         }
 
         public void ShowStructure()
         {
-            foreach (var module in _speciesMenu.Values)
+            foreach (var module in _speciesModules)
                 module.ShowStructure();
         }
 
@@ -80,28 +57,29 @@
             double total = 0;
 
             Console.WriteLine($"\n--- ПРОГНОЗ КОРМУ НА {days} ДНІ(В) ---");
-            foreach (var entry in _speciesMenu)
+            for (int i = 0; i < _speciesModules.Length; i++)
             {
-                double speciesFood = entry.Value.GetFoodForPeriod(days);
+                double speciesFood = _speciesModules[i].GetFoodForPeriod(days);
                 total += speciesFood;
-                Console.WriteLine($"Вид #{entry.Key}: {speciesFood:F2} кг");
+                Console.WriteLine($"Вид #{i + 1}: {speciesFood:F2} кг");
             }
             Console.WriteLine("----------------------------------");
             Console.WriteLine($"ЗАГАЛОМ: {total:F2} кг\n");
         }
 
-        private int SelectSpecies(string message)
+        private ISpeciesModule GetSelectedModule(string message)
         {
             Console.WriteLine($"\n{message}");
             Console.WriteLine("1 - Тигр, 2 - Кенгуру, 3 - Крокодил");
-            return Input.ReadIntSafe("Ваш вибір: ", 1, _speciesMenu.Count);
+            int choice = Input.ReadIntSafe("Ваш вибір: ", 1, _speciesModules.Length);
+
+            return _speciesModules[choice - 1];
         }
 
-        public Dictionary<int, ISpeciesModule> GetModules() => _speciesMenu;
+
+        public ISpeciesModule[] GetModules() => _speciesModules;
     }
 }
-
-
 //using System;
 //using System.Collections.Generic;
 //using System.Text;
